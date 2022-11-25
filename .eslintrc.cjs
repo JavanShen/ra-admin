@@ -13,7 +13,7 @@ module.exports = {
             jsx: true
         }
     },
-    plugin: ['@typescript-eslint'],
+    plugins: ['@typescript-eslint'],
     rules: {
         'import/extensions': [
             'error',
