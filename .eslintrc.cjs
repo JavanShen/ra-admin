@@ -11,9 +11,10 @@ module.exports = {
         parser: '@typescript-eslint/parser',
         ecmaFeatures: {
             jsx: true
-        }
+        },
+        sourceType: "module"
     },
-    plugins: ['@typescript-eslint'],
+    plugins: ['@typescript-eslint',"import"],
     rules: {
         'import/extensions': [
             'error',
