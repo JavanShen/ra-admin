@@ -27,7 +27,8 @@ module.exports = {
                 ts: 'never',
                 tsx: 'never'
             }
-        ]
+        ],
+        'react/react-in-jsx-scope': 'off'
     },
     settings: {
         'import/resolver': {
