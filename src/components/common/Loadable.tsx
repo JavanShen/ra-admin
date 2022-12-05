@@ -1,17 +1,21 @@
 import type { ComponentType } from 'react'
 import React, { Suspense } from 'react'
 
+import Loading from './Loading'
+
 interface Props {
     loader(): Promise<{ default: ComponentType<unknown> }>
-    loading: ComponentType
+    loading?: ComponentType
 }
 
-const Loadable = ({ loader, loading: Loading }: Props) => {
+const Loadable = ({ loader, loading }: Props) => {
     const LazyComponent = React.lazy(loader)
+
+    const Load = loading || Loading
 
     const InnerComponent = () => {
         return (
-            <Suspense fallback={<Loading />}>
+            <Suspense fallback={<Load />}>
                 <LazyComponent />
             </Suspense>
         )
