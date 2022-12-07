@@ -1,4 +1,5 @@
 import { Form, Input, Button } from 'antd'
+import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import type { LoginForm } from '@/types/login'
 
 const LoginFrom = () => {
@@ -14,27 +15,32 @@ const LoginFrom = () => {
         <Form
             name="login"
             autoComplete="off"
-            labelCol={{ span: 8 }}
-            wrapperCol={{ span: 16 }}
+            wrapperCol={{ span: 24 }}
             onFinish={onFinish}
             onFinishFailed={onFinishFail}
         >
             <Form.Item
-                label="用户名"
                 name="username"
                 rules={[{ required: true, message: '请输入用户名' }]}
             >
-                <Input />
+                <Input
+                    prefix={<UserOutlined style={{ opacity: 0.6 }} />}
+                    placeholder="用户名"
+                    size="large"
+                />
             </Form.Item>
             <Form.Item
-                label="密码"
                 name="password"
                 rules={[{ required: true, message: '请输入密码' }]}
             >
-                <Input.Password />
+                <Input.Password
+                    prefix={<LockOutlined style={{ opacity: 0.6 }} />}
+                    placeholder="密码"
+                    size="large"
+                />
             </Form.Item>
-            <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-                <Button type="primary" htmlType="submit">
+            <Form.Item wrapperCol={{ span: 24 }}>
+                <Button type="primary" block htmlType="submit" size="large">
                     登录
                 </Button>
             </Form.Item>
