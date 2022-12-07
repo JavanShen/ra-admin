@@ -5,7 +5,7 @@ const fixedRoutes = [
         path: '/',
         name: 'Layout',
         component: Loadable({
-            loader: () => import('@/App')
+            loader: () => import('@/view/NotFound')
         })
     },
     {
