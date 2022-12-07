@@ -1,11 +1,9 @@
 import { Routes, Route } from 'react-router-dom'
-import { useSelector } from 'react-redux'
 import useRouterGuard from '@/hooks/useRouterGuard'
-
-import type { RootState } from '@/types/store'
+import useStoreSelector from '@/hooks/useStoreSelector.'
 
 const RouteTable = () => {
-    const routes = useSelector((state: RootState) => state.router.routes)
+    const { routes } = useStoreSelector('router')
 
     useRouterGuard()
 
