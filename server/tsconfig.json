@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "outDir": "../build",
     "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedParameters": false,
     "noImplicitReturns": true,
     "skipLibCheck": true,
     "rootDir": "src"
