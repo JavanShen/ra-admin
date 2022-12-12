@@ -2,5 +2,5 @@
     "watch": ["./"],
     "ext": ".ts,.js",
     "ignore": [],
-    "exec": "ts-node-esm ./index.ts"
+    "exec": "ts-node-esm src/index.ts"
   }
