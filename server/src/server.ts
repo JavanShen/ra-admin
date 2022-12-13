@@ -4,6 +4,8 @@ import path from 'path'
 
 const __dirname = path.resolve()
 
+const port = Number(process.env.PORT || '3000')
+
 const server = () => {
     const app = express()
 
@@ -15,7 +17,7 @@ const server = () => {
         res.sendFile(path.resolve(__dirname, 'dist/index.html'))
     })
 
-    app.listen(3000, () => {
+    app.listen(port, () => {
         console.log('server start')
     })
 }
