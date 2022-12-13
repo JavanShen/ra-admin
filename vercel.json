@@ -1,5 +1,11 @@
 {
     "outputDirectory": "build",
     "devCommand": "pnpm run dev",
-    "buildCommand": "pnpm run build && node build/index.js"
+    "buildCommand": "pnpm run build",
+    "builds": [
+        {
+            "src": "build/index.js",
+            "use": "@vercel/node"
+        }
+    ]
 }
