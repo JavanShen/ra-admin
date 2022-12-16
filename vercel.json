@@ -3,6 +3,10 @@
         {
             "source": "/:path",
             "destination": "/index.html"
+        },
+        {
+            "source": "/api/:match",
+            "destination": "https://ra-admin-api.vercel.app/api/:match"
         }
     ]
 }
