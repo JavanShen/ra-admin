@@ -1,6 +1,7 @@
 import Loadable from '@/components/common/Loadable'
+import type { Route } from '@/types/router'
 
-const fixedRoutes = [
+const fixedRoutes: Route[] = [
     {
         path: '/',
         name: 'Layout',
@@ -17,7 +18,7 @@ const fixedRoutes = [
     }
 ]
 
-const asyncRoutes = [
+const asyncRoutes: Route[] = [
     {
         path: 'user',
         name: 'User',
@@ -28,7 +29,28 @@ const asyncRoutes = [
             title: '用户',
             roles: ['admin']
         }
+    },
+    {
+        path: 'todo',
+        name: 'Todo',
+        component: Loadable({
+            loader: () => import('@/view/todo')
+        }),
+        meta: {
+            title: '待办',
+            roles: ['user']
+        }
     }
 ]
 
-export { fixedRoutes, asyncRoutes }
+const notFoundRoute: Route = {
+    path: '*',
+    name: 'NotFound',
+    component: Loadable({
+        loader: () => import('@/view/NotFound')
+    })
+}
+
+const whiteList = fixedRoutes.map(route => `/${route.path}`)
+
+export { fixedRoutes, asyncRoutes, whiteList, notFoundRoute }
