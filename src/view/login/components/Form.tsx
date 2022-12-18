@@ -1,50 +1,85 @@
-import { Form, Input, Button } from 'antd'
+import { useState } from 'react'
+import { Form, Input, Button, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import login from '../events/login'
+import useStoreSelector from '@/hooks/useStoreSelector'
+import { useNavigate } from 'react-router-dom'
+
 import type { LoginForm } from '@/types/login'
 
 const LoginFrom = () => {
-    const onFinish = (val: LoginForm) => {
-        console.log(val.username)
+    const [messageApi, contextHolder] = message.useMessage()
+
+    const [loading, setLoading] = useState(false)
+
+    const { location } = useStoreSelector('router')
+    const navigate = useNavigate()
+
+    const onFinish = async (val: LoginForm) => {
+        setLoading(true)
+
+        const { code, message: msg } = await login(val)
+
+        messageApi[code === 1 ? 'success' : 'error'](msg)
+
+        if (code === 1) {
+            const { pathname } = location.last
+
+            const to = pathname === '/login' ? '/' : pathname || '/'
+
+            navigate(to)
+        }
+
+        setLoading(false)
     }
 
     const onFinishFail = () => {
-        console.log('now finish fail')
+        messageApi.error('登录失败')
     }
 
     return (
-        <Form
-            name="login"
-            autoComplete="off"
-            wrapperCol={{ span: 24 }}
-            onFinish={onFinish}
-            onFinishFailed={onFinishFail}
-        >
-            <Form.Item
-                name="username"
-                rules={[{ required: true, message: '请输入用户名' }]}
+        <>
+            {contextHolder}
+            <Form
+                name="login"
+                autoComplete="off"
+                wrapperCol={{ span: 24 }}
+                onFinish={onFinish}
+                onFinishFailed={onFinishFail}
             >
-                <Input
-                    prefix={<UserOutlined style={{ opacity: 0.6 }} />}
-                    placeholder="用户名"
-                    size="large"
-                />
-            </Form.Item>
-            <Form.Item
-                name="password"
-                rules={[{ required: true, message: '请输入密码' }]}
-            >
-                <Input.Password
-                    prefix={<LockOutlined style={{ opacity: 0.6 }} />}
-                    placeholder="密码"
-                    size="large"
-                />
-            </Form.Item>
-            <Form.Item wrapperCol={{ span: 24 }}>
-                <Button type="primary" block htmlType="submit" size="large">
-                    登录
-                </Button>
-            </Form.Item>
-        </Form>
+                <Form.Item
+                    name="username"
+                    rules={[{ required: true, message: '请输入用户名' }]}
+                >
+                    <Input
+                        prefix={<UserOutlined style={{ opacity: 0.6 }} />}
+                        placeholder="用户名"
+                        size="large"
+                    />
+                </Form.Item>
+                <Form.Item
+                    name="password"
+                    rules={[{ required: true, message: '请输入密码' }]}
+                >
+                    <Input.Password
+                        prefix={<LockOutlined style={{ opacity: 0.6 }} />}
+                        placeholder="密码"
+                        size="large"
+                    />
+                </Form.Item>
+                <Form.Item wrapperCol={{ span: 24 }}>
+                    <Button
+                        type="primary"
+                        block
+                        htmlType="submit"
+                        size="large"
+                        loading={loading}
+                    >
+                        登录
+                    </Button>
+                </Form.Item>
+            </Form>
+        </>
     )
 }
 
