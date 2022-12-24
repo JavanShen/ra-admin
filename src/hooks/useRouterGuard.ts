@@ -18,6 +18,7 @@ const useRouterGuard = (to: Location) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
+        let isCancelled = false
         const permission = async () => {
             if (whiteList.includes(pathname)) return
 
@@ -29,6 +30,8 @@ const useRouterGuard = (to: Location) => {
                 return
             } else {
                 const { code, data } = await getUserInfo()
+
+                if (isCancelled) return
 
                 if (code === 1) {
                     const routes = generateRoutes(data.role)
@@ -45,6 +48,10 @@ const useRouterGuard = (to: Location) => {
         }
 
         permission()
+
+        return () => {
+            isCancelled = true
+        }
     }, [pathname])
 }
 
