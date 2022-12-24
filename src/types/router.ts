@@ -1,4 +1,4 @@
-import type { ComponentType, MemoExoticComponent } from 'react'
+import type { ComponentType, MemoExoticComponent, ReactNode } from 'react'
 import type { Role } from './user'
 
 type Route = {
@@ -8,8 +8,11 @@ type Route = {
     meta?: {
         title: string
         roles: Role[]
+        icon?: ReactNode
+        group?: string
         [key: string]: unknown
     }
+    hidden?: boolean
     children?: Route[]
 }
 
