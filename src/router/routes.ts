@@ -1,14 +1,9 @@
+import { createElement } from 'react'
 import Loadable from '@/components/common/Loadable'
+import { UserOutlined, CalendarOutlined } from '@ant-design/icons'
 import type { Route } from '@/types/router'
 
 const fixedRoutes: Route[] = [
-    {
-        path: '/',
-        name: 'Layout',
-        component: Loadable({
-            loader: () => import('@/view/NotFound')
-        })
-    },
     {
         path: 'login',
         name: 'Login',
@@ -27,7 +22,8 @@ const asyncRoutes: Route[] = [
         }),
         meta: {
             title: '用户',
-            roles: ['admin']
+            roles: ['admin'],
+            icon: createElement(UserOutlined)
         }
     },
     {
@@ -38,7 +34,8 @@ const asyncRoutes: Route[] = [
         }),
         meta: {
             title: '待办',
-            roles: ['user']
+            roles: ['user'],
+            icon: createElement(CalendarOutlined)
         }
     }
 ]
@@ -48,7 +45,8 @@ const notFoundRoute: Route = {
     name: 'NotFound',
     component: Loadable({
         loader: () => import('@/view/NotFound')
-    })
+    }),
+    hidden: true
 }
 
 const whiteList = fixedRoutes.map(route => `/${route.path}`)
