@@ -45,9 +45,6 @@ const asyncRoutes: Route[] = [
     {
         path: 'test1',
         name: 'Test1',
-        component: Loadable({
-            loader: () => import('@/view/test/test1')
-        }),
         meta: {
             title: '测试1',
             roles: ['user'],
