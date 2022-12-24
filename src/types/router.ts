@@ -4,7 +4,7 @@ import type { Role } from './user'
 type Route = {
     name: string
     path: string
-    component: MemoExoticComponent<ComponentType>
+    component?: MemoExoticComponent<ComponentType>
     meta?: {
         title: string
         roles: Role[]
