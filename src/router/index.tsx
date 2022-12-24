@@ -6,16 +6,29 @@ import { useLocation } from 'react-router-dom'
 import Layout from '@/layout'
 
 import type { Route as R } from '@/types/router'
+import type { ReactNode } from 'react'
+
+interface RouteProps {
+    path: string
+    element?: ReactNode
+}
 
 const renderRoutes = (routes: R[]) => {
-    return routes.map(route => (
-        <Route
-            key={route.name}
-            path={route.path}
-            element={<route.component />}
-            {...(route.children ? renderRoutes(route.children) : null)}
-        ></Route>
-    ))
+    return routes.map(({ name, path, component: Com, children }) => {
+        const property: RouteProps = {
+            path
+        }
+
+        if (Com) {
+            property.element = <Com />
+        }
+
+        return (
+            <Route key={name} {...property}>
+                {children ? renderRoutes(children) : null}
+            </Route>
+        )
+    })
 }
 
 const RouteTable = () => {
