@@ -5,17 +5,17 @@ import type { Route } from '@/types/router'
 import type { Role } from '@/types/user'
 
 const filterRoutesByRole = (routes: Route[], role: Role) => {
-    return produce(routes, draft =>
-        draft.reduce((res, route) => {
-            if (route.meta?.roles.includes(role)) {
-                const { children } = route
+    return routes.reduce((res, route) => {
+        if (route.meta?.roles.includes(role)) {
+            const newRoute = produce(route, draft => {
+                const { children } = draft
                 if (children)
-                    route.children = filterRoutesByRole(children, role)
-                res.push(route)
-            }
-            return res
-        }, <Route[]>[])
-    )
+                    draft.children = filterRoutesByRole(children, role)
+            })
+            res.push(newRoute)
+        }
+        return res
+    }, <Route[]>[])
 }
 
 const generateRoutes = (role: Role) => {
