@@ -1,18 +1,28 @@
+import { createElement } from 'react'
+import { Link } from 'react-router-dom'
+
 import type { Route } from '@/types/router'
 import type { ItemType, SubMenuType } from 'antd/es/menu/hooks/useItems'
 
-const routesToMenu = (routes: Route[]): ItemType[] => {
+const routesToMenu = (routes: Route[], basePath = ''): ItemType[] => {
     const group = new Map<string, ItemType[]>()
 
     const menus = routes.reduce((res, route) => {
         if (!route.hidden) {
-            const { children, meta } = route
-            const MenuItemChildren = children ? routesToMenu(children) : null
+            const { children, meta, path, component } = route
+
+            const completePath = `${basePath}/${path}`
+
+            const MenuItemChildren = children
+                ? routesToMenu(children, completePath)
+                : null
 
             const menuItem: ItemType = {
-                label: meta?.title,
-                key: route.path,
-                icon: route.meta?.icon
+                label: component
+                    ? createElement(Link, { to: completePath }, meta?.title)
+                    : meta?.title,
+                key: completePath,
+                icon: meta?.icon
             }
 
             if (MenuItemChildren) {
