@@ -3,6 +3,7 @@ import useRouterGuard from '@/hooks/useRouterGuard'
 import useStoreSelector from '@/hooks/useStoreSelector'
 import useRecordHistory from '@/hooks/useRecordHistory'
 import { useLocation } from 'react-router-dom'
+import Layout from '@/layout'
 
 import type { Route as R } from '@/types/router'
 
@@ -18,14 +19,21 @@ const renderRoutes = (routes: R[]) => {
 }
 
 const RouteTable = () => {
-    const { routes } = useStoreSelector('router')
+    const { fixedRoutes, asyncRoutes } = useStoreSelector('router')
     const location = useLocation()
 
     useRecordHistory()
 
     useRouterGuard(location)
 
-    return <Routes>{renderRoutes(routes)}</Routes>
+    return (
+        <Routes>
+            {renderRoutes(fixedRoutes)}
+            <Route key="Layout" path="/" element={<Layout />}>
+                {renderRoutes(asyncRoutes)}
+            </Route>
+        </Routes>
+    )
 }
 
 export default RouteTable
