@@ -8,8 +8,9 @@ import { useNavigate } from 'react-router-dom'
 import type { LoginForm } from '@/types/login'
 
 const LoginFrom = () => {
-    const [messageApi, contextHolder] = message.useMessage()
+    const [form] = Form.useForm()
 
+    const [messageApi, contextHolder] = message.useMessage()
     const [loading, setLoading] = useState(false)
 
     const { location } = useStoreSelector('router')
@@ -42,6 +43,7 @@ const LoginFrom = () => {
             {contextHolder}
             <Form
                 name="login"
+                form={form}
                 autoComplete="off"
                 wrapperCol={{ span: 24 }}
                 onFinish={onFinish}
@@ -49,7 +51,14 @@ const LoginFrom = () => {
             >
                 <Form.Item
                     name="username"
-                    rules={[{ required: true, message: '请输入用户名' }]}
+                    rules={[
+                        { required: true, message: '请输入用户名' },
+                        {
+                            min: 2,
+                            max: 7,
+                            message: '用户名长度需要在2-7字符之间'
+                        }
+                    ]}
                 >
                     <Input
                         prefix={<UserOutlined style={{ opacity: 0.6 }} />}
