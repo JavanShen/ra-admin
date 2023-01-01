@@ -1,6 +1,6 @@
-type LoginForm = {
+type LoginInfo = {
     username: string
     password: string
 }
 
-export type { LoginForm }
+export type { LoginInfo }
