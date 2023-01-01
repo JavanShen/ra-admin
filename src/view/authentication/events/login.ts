@@ -1,8 +1,8 @@
 import { loginByUserName } from '@/api/user'
 
-import type { LoginForm } from '@/types/login'
+import type { LoginInfo } from '@/types/login'
 
-const login = async (val: LoginForm) => {
+const login = async (val: LoginInfo) => {
     const { code, message } = await loginByUserName({ ...val })
 
     return {

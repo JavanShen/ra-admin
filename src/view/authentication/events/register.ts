@@ -1,8 +1,8 @@
 import { registerByUserName } from '@/api/user'
 
-import type { RegisterForm } from '@/types/register'
+import type { RegisterInfo } from '@/types/register'
 
-const register = async (val: RegisterForm) => {
+const register = async (val: RegisterInfo) => {
     const { code, message } = await registerByUserName({ ...val })
 
     return {
