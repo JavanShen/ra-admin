@@ -24,7 +24,8 @@ const useRouterGuard = (to: Location) => {
 
             const token = getToken()
 
-            if (token === null) return navigate('/login', { replace: true })
+            if (token === null)
+                return navigate('/login', { replace: true, state: { to } })
 
             if (userInfo.role) {
                 return

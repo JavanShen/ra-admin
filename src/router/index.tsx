@@ -1,7 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import useRouterGuard from '@/hooks/useRouterGuard'
 import useStoreSelector from '@/hooks/useStoreSelector'
-import useRecordHistory from '@/hooks/useRecordHistory'
 import { useLocation } from 'react-router-dom'
 import Layout from '@/layout'
 
@@ -34,8 +33,6 @@ const renderRoutes = (routes: R[]) => {
 const RouteTable = () => {
     const { fixedRoutes, asyncRoutes } = useStoreSelector('router')
     const location = useLocation()
-
-    useRecordHistory()
 
     useRouterGuard(location)
 

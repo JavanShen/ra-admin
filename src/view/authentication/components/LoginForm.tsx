@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { Form, Input, Button, message } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import login from '../events/login'
-import useStoreSelector from '@/hooks/useStoreSelector'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import type { LoginInfo } from '@/types/login'
+import type { Location } from 'react-router-dom'
 
 const LoginForm = () => {
     const [form] = Form.useForm()
@@ -13,8 +13,8 @@ const LoginForm = () => {
     const [messageApi, contextHolder] = message.useMessage()
     const [loading, setLoading] = useState(false)
 
-    const { location } = useStoreSelector('router')
     const navigate = useNavigate()
+    const location = useLocation()
 
     const onFinish = async (val: LoginInfo) => {
         setLoading(true)
@@ -24,9 +24,12 @@ const LoginForm = () => {
         messageApi[code === 1 ? 'success' : 'error'](msg)
 
         if (code === 1) {
-            const { pathname } = location.last
+            const pathname = (location.state?.to as Location)?.pathname
 
-            const to = pathname === '/login' ? '/' : pathname || '/'
+            const to =
+                pathname === '/login' || pathname === '/register'
+                    ? '/'
+                    : pathname || '/'
 
             navigate(to)
         }
