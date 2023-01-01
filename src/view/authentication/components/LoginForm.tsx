@@ -5,9 +5,9 @@ import login from '../events/login'
 import useStoreSelector from '@/hooks/useStoreSelector'
 import { useNavigate } from 'react-router-dom'
 
-import type { LoginForm } from '@/types/login'
+import type { LoginInfo } from '@/types/login'
 
-const LoginFrom = () => {
+const LoginForm = () => {
     const [form] = Form.useForm()
 
     const [messageApi, contextHolder] = message.useMessage()
@@ -16,7 +16,7 @@ const LoginFrom = () => {
     const { location } = useStoreSelector('router')
     const navigate = useNavigate()
 
-    const onFinish = async (val: LoginForm) => {
+    const onFinish = async (val: LoginInfo) => {
         setLoading(true)
 
         const { code, message: msg } = await login(val)
@@ -92,4 +92,4 @@ const LoginFrom = () => {
     )
 }
 
-export default LoginFrom
+export default LoginForm

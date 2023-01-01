@@ -4,25 +4,38 @@ import { flexCenter } from '@/styles/common'
 const Background = styled.div({
     height: '100%',
     width: '100%',
-    display: 'flex'
+    overflow: 'hidden'
 })
 
-const Left = styled.div({
+const Float = styled.div({
     background:
         'linear-gradient(135deg, #af68cc 0%, #7d4d90  50%, #653e75 100%)',
-    flex: 2,
+    width: '40%',
     height: '100%',
     boxSizing: 'content-box',
     color: 'white',
     flexFlow: 'column nowrap',
+    position: 'fixed',
+    zIndex: 3,
     ...flexCenter
 })
 
-const Right = styled.div({
-    flex: 3,
+const form = {
     height: '100%',
+    width: '60%',
     flexFlow: 'column nowrap',
+    position: 'absolute',
     ...flexCenter
+} as const
+
+const Left = styled.div({
+    left: 0,
+    ...form
+})
+
+const Right = styled.div({
+    left: '40%',
+    ...form
 })
 
 const Title = styled.h1({
@@ -35,4 +48,4 @@ const FormContainer = styled.div({
     width: '60%'
 })
 
-export { Background, Left, Right, FormContainer, Title }
+export { Background, Float, Left, Right, FormContainer, Title }
