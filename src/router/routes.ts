@@ -7,13 +7,20 @@ import {
 } from '@ant-design/icons'
 import type { Route } from '@/types/router'
 
+const Authentication = Loadable({
+    loader: () => import('@/view/authentication')
+})
+
 const fixedRoutes: Route[] = [
     {
         path: 'login',
         name: 'Login',
-        component: Loadable({
-            loader: () => import('@/view/login')
-        })
+        component: Authentication
+    },
+    {
+        path: 'register',
+        name: 'Register',
+        component: Authentication
     }
 ]
 
