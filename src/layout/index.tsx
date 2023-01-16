@@ -21,7 +21,8 @@ const LayOut = () => {
                         style={{
                             padding: 24,
                             margin: 0,
-                            backgroundColor: '#f5f5f5'
+                            backgroundColor: '#f5f5f5',
+                            overflow: 'hidden'
                         }}
                     >
                         <AppMain />
