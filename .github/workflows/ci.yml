@@ -12,7 +12,7 @@ jobs:
     steps:
       # 拉取项目代码
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       # 使用pnpm
       - name: Use pnpm
         uses: pnpm/action-setup@v2.2.4
