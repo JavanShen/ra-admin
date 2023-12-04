@@ -16,7 +16,7 @@
     "@ant-design/icons": "^5.0.0",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
-    "@reduxjs/toolkit": "^1.9.1",
+    "@reduxjs/toolkit": "^2.0.0",
     "antd": "5.10.0",
     "axios": "^1.2.1",
     "history": "^5.3.0",
