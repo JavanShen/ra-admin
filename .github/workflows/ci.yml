@@ -30,7 +30,7 @@ jobs:
       - name: Cache
         # 缓存命中结果会存储在steps.[id].outputs.cache-hit里，该变量在继后的step中可读
         id: cache-dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           # 缓存文件目录的路径
           path: |
